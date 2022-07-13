@@ -26,6 +26,7 @@ const shuffleBtn=$('.shuffle-icon');
 const app = {
     currentIndex: 0,
     isPlaying: false,
+    isRandom:false,
     songs: [
         {
             name: 'Song1',
@@ -150,14 +151,28 @@ const app = {
 
         //next song
         nextBtn.onclick=function(){
-            app.nextSong();
+            if(app.isRandom){
+                app.randomSong();
+            }else{
+                app.nextSong();
+            }
             audio.play();
         }
 
         //previous song
         prevBtn.onclick=function(){
-            app.prevSong();
+            if(app.isRandom){
+                app.randomSong();
+            }else{
+                app.prevSong();
+            }
             audio.play();
+        }
+
+        //random song
+        shuffleBtn.onclick=function(){
+            app.isRandom=!app.isRandom;
+            shuffleBtn.classList.toggle('active',app.isRandom);
         }
     },
 
@@ -198,6 +213,15 @@ const app = {
             this.currentIndex=this.songs.length;
         }
         this.currentIndex--;
+        this.loadCurrentSong();
+    },
+
+    randomSong:function(){
+        let newIndex;
+        do{
+            newIndex=Math.floor(Math.random()*app.songs.length);
+        }while(newIndex === this.currentIndex);
+        this.currentIndex=newIndex;
         this.loadCurrentSong();
     },
 

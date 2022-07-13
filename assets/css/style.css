@@ -78,6 +78,9 @@ html {
     color: var(--light-text-color);
 }
 
+.active{
+    color: var(--primary-color);
+}
 
 .replay-icon,
 .prev-icon,
