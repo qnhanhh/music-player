@@ -10,6 +10,7 @@
 9. scroll active song into view
 10. play song when click
 */
+const PLAYER_STORAGE_KEY='Music_Player';
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
@@ -18,15 +19,25 @@ const cdThumb = $('.cd-thumb');
 const cd = $('.dashboard__cd');
 const audio = $('#audio');
 const togglePlay = $('.control-toggle');
-const progress=$('#progress');
-const nextBtn=$('.next-icon');
-const prevBtn=$('.prev-icon');
-const shuffleBtn=$('.shuffle-icon');
+const progress = $('#progress');
+const nextBtn = $('.next-icon');
+const prevBtn = $('.prev-icon');
+const shuffleBtn = $('.shuffle-icon');
+const replayBtn = $('.replay-icon');
+const playlist = $('.playlist__list');
 
 const app = {
     currentIndex: 0,
     isPlaying: false,
-    isRandom:false,
+    isRandom: false,
+    isReplay: false,
+    config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY))||{},
+
+    setConfig: function(key, value){
+        this.config[key]=value;
+        localStorage.setItem(PLAYER_STORAGE_KEY, JSON.stringify(this.config));
+    },
+
     songs: [
         {
             name: 'Song1',
@@ -128,51 +139,79 @@ const app = {
         }
 
         //cd rotation
-        const cdAnimate=cdThumb.animate([{
-            transform:'rotate(360deg)'
-        }],{
-            duration:10000, //10 seconds
-            iterations:Infinity
+        const cdAnimate = cdThumb.animate([{
+            transform: 'rotate(360deg)'
+        }], {
+            duration: 10000, //10 seconds
+            iterations: Infinity
         })
         cdAnimate.pause();
 
         //time update
-        audio.ontimeupdate=function(){
-            if(audio.duration){
-                progress.value=Math.floor(audio.currentTime / audio.duration * 100);
+        audio.ontimeupdate = function () {
+            if (audio.duration) {
+                progress.value = Math.floor(audio.currentTime / audio.duration * 100);
             }
         }
 
         //seek song
-        progress.oninput=function(){
-            const seekTime=progress.value * audio.duration / 100;
-            audio.currentTime=seekTime;
+        progress.oninput = function () {
+            const seekTime = progress.value * audio.duration / 100;
+            audio.currentTime = seekTime;
         }
 
         //next song
-        nextBtn.onclick=function(){
-            if(app.isRandom){
+        nextBtn.onclick = function () {
+            if (app.isRandom) {
                 app.randomSong();
-            }else{
+            } else {
                 app.nextSong();
             }
             audio.play();
         }
 
         //previous song
-        prevBtn.onclick=function(){
-            if(app.isRandom){
+        prevBtn.onclick = function () {
+            if (app.isRandom) {
                 app.randomSong();
-            }else{
+            } else {
                 app.prevSong();
             }
             audio.play();
         }
 
         //random song
-        shuffleBtn.onclick=function(){
-            app.isRandom=!app.isRandom;
-            shuffleBtn.classList.toggle('active',app.isRandom);
+        shuffleBtn.onclick = function () {
+            app.isRandom = !app.isRandom;
+            app.setConfig('isRandom',app.isRandom);
+            shuffleBtn.classList.toggle('active', app.isRandom);
+        }
+
+        //replay song
+        replayBtn.onclick = function () {
+            app.isReplay = !app.isReplay;
+            app.setConfig('isReplay',app.isReplay);
+            replayBtn.classList.toggle('active', app.isReplay);
+        }
+
+        //next song when ended
+        audio.onended = function () {
+            if (app.isReplay) {
+                audio.play();
+            } else {
+                nextBtn.click();
+            }
+        }
+
+        //listen when click a song
+        playlist.onclick = function (e) {
+            const chosenSong = e.target.closest('.playlist__item:not(.active)');
+            if(chosenSong){
+                app.currentIndex=Number(chosenSong.dataset.index);
+                app.loadCurrentSong();
+                app.render();
+                audio.play();
+            }
         }
     },
 
@@ -183,9 +222,9 @@ const app = {
     },
 
     render: function () {
-        const htmls = this.songs.map(song => {
+        const htmls = this.songs.map((song, index) => {
             return `
-            <div class="playlist__item">
+            <div class="playlist__item ${index === this.currentIndex ?'active' : ''}" data-index="${index}">
                 <div class="song__thumb" style="background: url('${song.image}') top center /cover;"></div>
                 <div class="song__body">
                     <h3 class="body__title">${song.name}</h3>
@@ -197,35 +236,54 @@ const app = {
             </div>
             `
         });
-        $('.playlist__list').innerHTML = htmls.join(' ');
+        playlist.innerHTML = htmls.join(' ');
     },
 
-    nextSong:function(){
+    nextSong: function () {
         this.currentIndex++;
-        if(this.currentIndex>=this.songs.length){
-            this.currentIndex=0;
+        if (this.currentIndex >= this.songs.length) {
+            this.currentIndex = 0;
         }
         this.loadCurrentSong();
+        this.render();
+        this.scrollToActiveSong();
     },
 
-    prevSong:function(){
-        if(this.currentIndex<0){
-            this.currentIndex=this.songs.length;
+    prevSong: function () {
+        if (this.currentIndex < 0) {
+            this.currentIndex = this.songs.length;
         }
         this.currentIndex--;
         this.loadCurrentSong();
+        this.render();
+        this.scrollToActiveSong();
     },
 
-    randomSong:function(){
+    randomSong: function () {
         let newIndex;
-        do{
-            newIndex=Math.floor(Math.random()*app.songs.length);
-        }while(newIndex === this.currentIndex);
-        this.currentIndex=newIndex;
+        do {
+            newIndex = Math.floor(Math.random() * app.songs.length);
+        } while (newIndex === this.currentIndex);
+        this.currentIndex = newIndex;
         this.loadCurrentSong();
     },
 
+    scrollToActiveSong: function () {
+        $('.playlist__item.active').scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
+    },
+
+    loadConfig:function(){
+        this.isRandom=this.config.isRandom;
+        this.isReplay=this.config.isReplay;
+    },
+
     start: function () {
+        //load cau hinh
+        this.loadConfig();
+
         //dinh nghia thuoc tinh cho object
         this.defineProperties();
 
@@ -237,6 +295,10 @@ const app = {
 
         //render playlist
         this.render();
+
+        //hien thi trang thai config
+        shuffleBtn.classList.toggle('active', app.isRandom);
+        replayBtn.classList.toggle('active', app.isReplay);
     }
 }
 

@@ -177,6 +177,20 @@ html {
     margin-bottom: 1.5rem;
 }
 
+.playlist__item.active{
+    background-color: var(--primary-color);
+}
+
+.playlist__item.active .body__title,
+.playlist__item.active .body__author,
+.playlist__item.active .song__option{
+    color: var(--white-color);
+}
+
+.playlist__item:active{
+    opacity: 0.8;
+}
+
 .song__thumb{
     --size:60px;
     width: var(--size);
