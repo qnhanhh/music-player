@@ -24,58 +24,96 @@
       <!-- Dashboard -->
       <div class="dashboard">
         <!-- Header -->
-        <header class="dashboard__header">
-          <h4>Now playing:</h4>
-          <h2>String 57th & 9th</h2>
-        </header>
+        <h1 class="wrapper__header">Now Playing</h1>
 
-        <!-- CD -->
-        
-        <div class="dashboard__cd">
-            <div class="cd-thumb" style="background: url('https://i.ytimg.com/vi/jTLhQf5KJSc/maxresdefault.jpg') top center /cover;"></div>
+        <div class="wrapper">
+          <!-- CD -->
+          <div class="dashboard__cd">
+            <div
+              class="cd-thumb"
+              style="
+                background: url('https://i.ytimg.com/vi/jTLhQf5KJSc/maxresdefault.jpg')
+                  top center / cover;
+              "
+            ></div>
+            <div class="cd-title">
+              <h2 class="cd-name">song name</h2>
+              <h4 class="cd-singer">singer</h4>
+            </div>
+          </div>
+
+          <!-- Progress range -->
+          <div class="dashboard__progress">
+            <input
+              id="progress"
+              type="range"
+              value="0"
+              step="1"
+              min="0"
+              max="100"
+            />
+            <div class="progress__time">
+              <small class="progress__start">00:00</small>
+              <small class="progress__end">03:57</small>
+            </div>
+          </div>
+          
+          <!-- Control -->
+          <div class="dashboard__control">
+            <div class="control-replay">
+              <i class="replay-icon fa-solid fa-rotate-right"></i>
+            </div>
+            <div class="control-prev">
+              <i class="prev-icon fa-solid fa-angles-left"></i>
+            </div>
+            <div class="control-toggle">
+              <i class="play-icon fa-solid fa-circle-play"></i>
+              <i class="pause-icon fa-solid fa-circle-pause"></i>
+            </div>
+            <div class="control-next">
+              <i class="next-icon fa-solid fa-angles-right"></i>
+            </div>
+            <div class="control-shuffle">
+              <i class="shuffle-icon fa-solid fa-shuffle"></i>
+            </div>
+          </div>
+
+          <!-- Audio -->
+          <audio src="" id="audio"></audio>
         </div>
-
-        <!-- Control -->
-        <div class="dashboard__control">
-          <div class="control-replay">
-            <i class="replay-icon fa-solid fa-rotate-right"></i>
-          </div>
-          <div class="control-prev">
-            <i class="prev-icon fa-solid fa-angles-left"></i>
-          </div>
-          <div class="control-toggle">
-            <i class="play-icon fa-solid fa-circle-play"></i>
-            <i class="pause-icon fa-solid fa-circle-pause"></i>
-          </div>
-          <div class="control-next">
-            <i class="next-icon fa-solid fa-angles-right"></i>
-          </div>
-          <div class="control-shuffle">
-            <i class="shuffle-icon fa-solid fa-shuffle"></i>
-          </div>
-        </div>
-
-        <!-- Progress range -->
-        <input id="progress" type="range" value="0" step="1" min="0" max="100">
-
-        <!-- Audio -->
-        <audio src="" id="audio"></audio>
       </div>
 
       <!-- Playlist -->
       <div class="playlist">
-        <!-- Indicator -->
-        <div class="playlist__indicator">
-            Up next:
-        </div>
+        <h1 class="wrapper__header">Your Playlist</h1>
 
-        <!-- Songs -->
-        <div class="playlist__list">
-            
+        <div class="wrapper">
+          <!-- Indicator -->
+          <div class="playlist__indicator">Up next:</div>
+
+          <!-- Songs -->
+          <div class="playlist__list">
+            <div class="playlist__item active" data-index="0">
+              <div
+                class="song__thumb"
+                style="
+                  background: url('https://www.w3schools.com/howto/img_forest.jpg')
+                    top center / cover;
+                "
+              ></div>
+              <div class="song__body">
+                <h3 class="body__title">${song.name}</h3>
+                <p class="body__author">${song.singer}</p>
+              </div>
+              <div class="song__option">
+                <i class="option-icon fa-solid fa-ellipsis"></i>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <script src="/assets/js/main.js"></script>
+    <!-- <script src="/assets/js/main.js"></script> -->
   </body>
 </html>
