@@ -5,16 +5,44 @@
   
   /* Tablet & Mobile */
   @media (max-width: 1023px) {
-    
+    body{
+        height: 100%;
+    }
+    .container{
+        grid-template-columns: 1fr;
+        margin: 2rem;
+    }
+    .dashboard{
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        left: 0;
+        margin: 3rem;
+    }
+    .wrapper__header{
+        text-align: center;
+    }
+    .playlist{
+        margin: 0 1rem;
+        margin-top: 62rem;
+    }
   }
   
   /* Tablet */
   @media (min-width: 740px) and (max-width: 1023px) {
-   
   }
   
   /* Mobile */
   @media (max-width: 739px) {
-    
+    .dashboard__cd{
+        width: 100%;
+    }
+    .dashboard__control{
+        font-size: 2rem;
+    }
+    .control-toggle{
+        font-size: 3.5rem;
+    }
   }
   

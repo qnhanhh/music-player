@@ -56,7 +56,7 @@ body {
 .cd-thumb {
   width: 100%;
   padding-top: 100%;
-  border-radius: 8px;
+  border-radius: 50%;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   margin: 0 auto 30px;
 }
@@ -110,9 +110,9 @@ body {
 /* Control */
 .dashboard__control {
   margin-top: 2rem;
-  display: flex;
-  gap: 6rem;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  justify-items: center;
   align-items: center;
   font-size: 2.5rem;
   color: var(--navy-color);
@@ -144,9 +144,18 @@ body {
   -moz-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  border-radius: 50%;
 }
 
 .pause-icon {
+  display: none;
+}
+
+.playing .pause-icon{
+  display: inline-block;
+}
+
+.playing .play-icon{
   display: none;
 }
 

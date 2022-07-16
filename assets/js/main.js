@@ -14,8 +14,9 @@ const PLAYER_STORAGE_KEY='Music_Player';
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
-const heading = $('header h2');
+const heading = $('.cd-name');
 const cdThumb = $('.cd-thumb');
+const dashWrapper=$('.dashboard .wrapper');
 const cd = $('.dashboard__cd');
 const audio = $('#audio');
 const togglePlay = $('.control-toggle');
@@ -111,12 +112,14 @@ const app = {
 
     handleEvents: function () {
         //stretch/skrink cd
-        const cdWidth = cd.offsetWidth;
+        const cdWidth = cdThumb.offsetWidth;
         document.onscroll = function () {
             const scrollTop = window.scrollY || document.documentElement.scrollTop;
             const newCdWidth = cdWidth - scrollTop;
             cd.style.width = newCdWidth > 0 ? newCdWidth + 'px' : 0;
             cd.style.opacity = newCdWidth / cdWidth;
+            const newPadding=dashWrapper.offsetTop - scrollTop;
+            dashWrapper.style.paddingTop= newPadding > 10 ? newPadding + 'px' : 10;
         }
 
         //play/pause audio
@@ -140,7 +143,7 @@ const app = {
 
         //cd rotation
         const cdAnimate = cdThumb.animate([{
-            transform: 'rotate(360deg)'
+            transform: 'borderRadius(50%) rotate(360deg)'
         }], {
             duration: 10000, //10 seconds
             iterations: Infinity
@@ -225,18 +228,24 @@ const app = {
         const htmls = this.songs.map((song, index) => {
             return `
             <div class="playlist__item ${index === this.currentIndex ?'active' : ''}" data-index="${index}">
-                <div class="song__thumb" style="background: url('${song.image}') top center /cover;"></div>
-                <div class="song__body">
-                    <h3 class="body__title">${song.name}</h3>
-                    <p class="body__author">${song.singer}</p>
-                </div>
-                <div class="song__option">
-                    <i class="option-icon fa-solid fa-ellipsis"></i>
-                </div>
+              <div
+                class="song__thumb"
+                style="
+                  background: url('${song.image}')
+                    top center / cover;
+                "
+              ></div>
+              <div class="song__body">
+                <h3 class="body__title">${song.name}</h3>
+                <p class="body__author">${song.singer}</p>
+              </div>
+              <div class="song__duration">
+                <small>03:57</small>
+              </div>
             </div>
             `
         });
-        playlist.innerHTML = htmls.join(' ');
+        playlist.innerHTML = htmls.join('');
     },
 
     nextSong: function () {
