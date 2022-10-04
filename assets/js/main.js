@@ -41,62 +41,62 @@ const app = {
 
     songs: [
         {
-            name: 'Song1',
-            singer: 'singer1',
+            name: 'Chạy Khỏi Thế Giới Này',
+            singer: 'Da LAB & Phương Ly',
             url: '/assets/music/Chay-Khoi-The-Gioi-Nay-Da-LAB-Phuong-Ly.mp3',
             image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'
         },
         {
-            name: 'Song2',
-            singer: 'singer2',
+            name: 'Chạy Khỏi Thế Giới Này',
+            singer: 'Da LAB & Phương Ly',
             url: '/assets/music/Chay-Khoi-The-Gioi-Nay-Da-LAB-Phuong-Ly.mp3',
             image: 'https://static.remove.bg/remove-bg-web/5c20d2ecc9ddb1b6c85540a333ec65e2c616dbbd/assets/start-1abfb4fe2980eabfbbaaa4365a0692539f7cd2725f324f904565a9a744f8e214.jpg'
         },
         {
-            name: 'Song3',
-            singer: 'singer3',
+            name: 'Chạy Khỏi Thế Giới Này',
+            singer: 'Da LAB & Phương Ly',
             url: '/assets/music/Chay-Khoi-The-Gioi-Nay-Da-LAB-Phuong-Ly.mp3',
             image: 'https://www.w3schools.com/w3css/img_lights.jpg'
         },
         {
-            name: 'Song4',
-            singer: 'singer4',
+            name: 'Chạy Khỏi Thế Giới Này',
+            singer: 'Da LAB & Phương Ly',
             url: '/assets/music/Chay-Khoi-The-Gioi-Nay-Da-LAB-Phuong-Ly.mp3',
             image: 'https://www.w3schools.com/w3css/img_lights.jpg'
         },
         {
-            name: 'Song5',
-            singer: 'singer5',
+            name: 'Chạy Khỏi Thế Giới Này',
+            singer: 'Da LAB & Phương Ly',
             url: '/assets/music/Chay-Khoi-The-Gioi-Nay-Da-LAB-Phuong-Ly.mp3',
             image: 'https://www.w3schools.com/w3css/img_lights.jpg'
         },
         {
-            name: 'Song6',
-            singer: 'singer6',
+            name: 'Chạy Khỏi Thế Giới Này',
+            singer: 'Da LAB & Phương Ly',
             url: '/assets/music/Chay-Khoi-The-Gioi-Nay-Da-LAB-Phuong-Ly.mp3',
             image: 'https://www.w3schools.com/w3css/img_lights.jpg'
         },
         {
-            name: 'Song7',
-            singer: 'singer7',
+            name: 'Chạy Khỏi Thế Giới Này',
+            singer: 'Da LAB & Phương Ly',
             url: '/assets/music/Chay-Khoi-The-Gioi-Nay-Da-LAB-Phuong-Ly.mp3',
             image: 'https://www.w3schools.com/w3css/img_lights.jpg'
         },
         {
-            name: 'Song8',
-            singer: 'singer8',
+            name: 'Chạy Khỏi Thế Giới Này',
+            singer: 'Da LAB & Phương Ly',
             url: '/assets/music/Chay-Khoi-The-Gioi-Nay-Da-LAB-Phuong-Ly.mp3',
             image: 'https://www.w3schools.com/w3css/img_lights.jpg'
         },
         {
-            name: 'Song9',
-            singer: 'singer9',
+            name: 'Chạy Khỏi Thế Giới Này',
+            singer: 'Da LAB & Phương Ly',
             url: '/assets/music/Chay-Khoi-The-Gioi-Nay-Da-LAB-Phuong-Ly.mp3',
             image: 'https://www.w3schools.com/w3css/img_lights.jpg'
         },
         {
-            name: 'Song10',
-            singer: 'singer10',
+            name: 'Chạy Khỏi Thế Giới Này',
+            singer: 'Da LAB & Phương Ly',
             url: '/assets/music/Chay-Khoi-The-Gioi-Nay-Da-LAB-Phuong-Ly.mp3',
             image: 'https://www.w3schools.com/w3css/img_lights.jpg'
         }
